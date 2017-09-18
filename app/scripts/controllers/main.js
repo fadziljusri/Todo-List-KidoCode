@@ -19,24 +19,24 @@ app.controller('MainCtrl', function ($scope, dbService) {
     $scope.words.$loaded().then(function () {
       var wordsArr = [];
       var inputArr = [];
-
+      var hasPermutation = false;
       for (var i = 0; i < $scope.words.length; i++) {
         wordsArr = $scope.words[i].title.split(" ").sort().join("");
         inputArr = $scope.newNote.split(" ").sort().join("");
 
         if (angular.lowercase(wordsArr) == angular.lowercase(inputArr)) {
           alert("Same Permutation");
+          hasPermutation = true
           break;
         } 
-        else {
-          $scope.newList = dbService.all;
-          $scope.newList.$add({
-            title: $scope.newNote
-          });
+      }
+      if(!hasPermutation) {
+        $scope.newList = dbService.all;
+        $scope.newList.$add({
+          title: $scope.newNote
+        });
 
-          alert("Added!");
-        }
-
+        alert("Added!");
       }
     });
 
