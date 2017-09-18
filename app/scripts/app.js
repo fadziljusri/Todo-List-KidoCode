@@ -21,6 +21,17 @@ var app = angular
 
   // app.value('fbURL', 'https://todowistweb-kidocode.firebaseio.com/');
   
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCAc1NG4nZr1qt4jNGc3lmBloLaVf3c8wg",
+    authDomain: "todowistweb-kidocode.firebaseapp.com",
+    databaseURL: "https://todowistweb-kidocode.firebaseio.com",
+    projectId: "todowistweb-kidocode",
+    storageBucket: "todowistweb-kidocode.appspot.com",
+    messagingSenderId: "87635243059"
+  };
+  firebase.initializeApp(config);
+  
   app.factory('dbService', function ($firebaseArray, $firebaseObject) {
     var ref = firebase.database().ref();
     var dbRefAll = $firebaseArray(ref)

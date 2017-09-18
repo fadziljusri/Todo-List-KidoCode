@@ -14,13 +14,33 @@ app.controller('MainCtrl', function ($scope, dbService) {
   $scope.notes = dbService.all;
 
   $scope.add = function () {
-    // console.log(dbService);
-    $scope.newList = dbService.all;
-    $scope.newList.$add({
-      title: $scope.newNote
+    // console.log(dbService.all);
+    $scope.words = dbService.all;
+    $scope.words.$loaded().then(function () {
+      var wordsArr = [];
+      var inputArr = [];
+
+      for (var i = 0; i < $scope.words.length; i++) {
+        wordsArr = $scope.words[i].title.split(" ").sort().join("");
+        inputArr = $scope.newNote.split(" ").sort().join("");
+
+        if (angular.lowercase(wordsArr) == angular.lowercase(inputArr)) {
+          alert("Same Permutation");
+          break;
+        } 
+        else {
+          $scope.newList = dbService.all;
+          $scope.newList.$add({
+            title: $scope.newNote
+          });
+
+          alert("Added!");
+        }
+
+      }
     });
 
-    alert("Added!");
+
   };
 
   $scope.completeNote = function (id) {
@@ -30,13 +50,13 @@ app.controller('MainCtrl', function ($scope, dbService) {
     $scope.updateN.$save(upd);
   };
 
-  $scope.delNote = function(id){
+  $scope.delNote = function (id) {
     // console.log(id);
     if (confirm("Sure to delete?")) {
       $scope.deleteN = dbService.all;
       var rem = $scope.deleteN.$getRecord(id);
       $scope.deleteN.$remove(rem);
     }
-    
+
   };
 });
