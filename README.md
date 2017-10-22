@@ -1,4 +1,4 @@
-# Todo-List-KidoCode
+# Todo-List-Web
 A simple todo list web site using yo, grunt, bower and angularfire.
 
 This project is generated with [yo angular generator](https://github.com/yeoman/generator-angular)
